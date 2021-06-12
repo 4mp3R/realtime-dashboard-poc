@@ -1,0 +1,16 @@
+{
+  "name": "realtime-dashboard",
+  "version": "1.0.0",
+  "description": "Proof of concept app for real-time dashboard showing sensor data",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "prettier": "^2.3.1",
+    "socket.io": "^4.1.2"
+  }
+}

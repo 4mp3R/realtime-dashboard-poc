@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .container {
+        width: 75%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Dashboard</h1>
+
+    <div class="container">
+      <canvas id="dashboard"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      function updateChart(chart, data) {
+        chart.data.labels = Object.keys(data);
+        chart.data.datasets[0].data = Object.values(data);
+        chart.update();
+      }
+
+      const config = {
+        type: 'bar',
+        data: {
+          labels: [],
+          datasets: [
+            {
+              label: 'Sensors network',
+              data: [],
+              backgroundColor: '#B84FCF',
+              borderColor: '#B788C2',
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            myScale: {
+              axis: 'y',
+              min: 40,
+              max: 1000,
+            },
+          },
+        },
+      };
+
+      const chart = new Chart(document.getElementById('dashboard'), config);
+
+      const socket = io();
+      socket.on('update', (data) => {
+        updateChart(chart, data);
+      });
+    </script>
+  </body>
+</html>
